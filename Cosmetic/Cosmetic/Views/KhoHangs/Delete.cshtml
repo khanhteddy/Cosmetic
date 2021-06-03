@@ -1,0 +1,41 @@
+﻿@model Cosmetic.Models.KhoHang
+
+@{
+    ViewData["Title"] = "| Xóa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<br />
+<br />
+
+<h3>Bạn có chắc chắn xóa @Html.DisplayFor(model => model.MaSpNavigation.TenSp) ? </h3>
+<div>
+    <h4>Thông tin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSpNavigation.TenSp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSpNavigation.TenSp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaKho" />
+        <input type="submit" value="Xóa" class="btn btn-default" /> <br /> <br />
+        <a asp-action="Index">Quay về</a>
+    </form>
+</div>

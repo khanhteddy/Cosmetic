@@ -1,0 +1,66 @@
+﻿@model Cosmetic.Models.HoaDon
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+
+<h3>Bạn có chắc chắn xóa hóa đơn số @Html.DisplayFor(model => model.MaHd) ? </h3>
+<div>
+    <h4>HoaDon</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaHd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaHd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNgNhan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenNgNhan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DtngNhan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DtngNhan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DiaChiNgNhan)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DiaChiNgNhan)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GhiChu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GhiChu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaTrangThai)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaTrangThai)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaHd" />
+        <input type="submit" value="Xóa" class="btn btn-default" /> <br /> <br />
+        <a asp-action="Index">Quay về</a>
+    </form>
+</div>

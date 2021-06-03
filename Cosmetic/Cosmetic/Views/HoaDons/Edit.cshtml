@@ -1,0 +1,97 @@
+﻿@model Cosmetic.Models.HoaDon
+
+@{
+    ViewData["Title"] = "| Cập nhật hóa đơn";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Cập nhật<small>  | Hóa đơn</small></h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data" >
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="MaHd" />
+            <div class="form-group">
+                <label asp-for="MaHd" class="control-label"></label>
+                <input asp-for="MaHd" disabled class="form-control" />
+                <span asp-validation-for="MaHd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenNgNhan" class="control-label"></label>
+                <input asp-for="TenNgNhan" class="form-control" />
+                <span asp-validation-for="TenNgNhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DtngNhan" class="control-label"></label>
+                <input asp-for="DtngNhan" class="form-control" />
+                <span asp-validation-for="DtngNhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaChiNgNhan" class="control-label"></label>
+                <input asp-for="DiaChiNgNhan" class="form-control" />
+                <span asp-validation-for="DiaChiNgNhan" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NgayDat" class="control-label"></label>
+                <input asp-for="NgayDat" class="form-control" />
+                <span asp-validation-for="NgayDat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaTrangThai" class="control-label"></label>
+                @if (Model.MaTrangThai == 0)
+                {
+                    <select class="form-control">
+                        <option value="0" selected>Chờ xác nhận</option>
+                        <option value="1">Đang chuẩn bị hàng</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    </select>
+                }
+                else if (Model.MaTrangThai == 1)
+                {
+                    <select class="form-control">
+                        <option value="0">Chờ xác nhận</option>
+                        <option value="1" selected>Đang chuẩn bị hàng</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    </select>
+                }
+                else if (Model.MaTrangThai == 2)
+                {
+                    <select class="form-control">
+                        <option value="0">Chờ xác nhận</option>
+                        <option value="1">Đang chuẩn bị hàng</option>
+                        <option value="2" selected>Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                    </select>
+                }
+                else if (Model.MaTrangThai == 3)
+                {
+                    <select class="form-control">
+                        <option value="0">Chờ xác nhận</option>
+                        <option value="1">Đang chuẩn bị hàng</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3" selected>Đã giao hàng</option>
+                    </select>
+                }
+                <span asp-validation-for="MaTrangThai" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="GhiChu" class="control-label"></label>
+                <input asp-for="GhiChu" class="form-control" />
+                <span asp-validation-for="GhiChu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay về</a>
+</div>
+

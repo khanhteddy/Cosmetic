@@ -1,0 +1,45 @@
+﻿@model Cosmetic.Models.Loai
+
+@{
+    ViewData["Title"] = "| Cập nhật thông tin loại";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Cập nhật<small>  | Loại</small></h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="MaLoai" />
+            <div class="form-group">
+                <label asp-for="MaLoai" class="control-label"></label>
+                <input asp-for="MaLoai" disabled class="form-control" />
+                <span asp-validation-for="MaLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenLoai" class="control-label"></label>
+                <input asp-for="TenLoai" class="form-control" />
+                <span asp-validation-for="TenLoai" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenLoaiAlias" class="control-label"></label>
+                <input asp-for="TenLoaiAlias" class="form-control" />
+                <span asp-validation-for="TenLoaiAlias" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label"></label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Quay về</a>
+</div>
+

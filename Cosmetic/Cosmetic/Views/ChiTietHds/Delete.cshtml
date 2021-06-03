@@ -1,0 +1,53 @@
+﻿@model Cosmetic.Models.ChiTietHd
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+
+<h3>Bạn có chắc chắn xóa sản phẩm @Html.DisplayFor(model => model.MaSpNavigation.TenSp) ? </h3>
+<div>
+    <h4>Thông tin chi tiết</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MaHd)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaHd)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSp)
+        </dd>
+        <dt>
+            Tên sản phẩm
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSpNavigation.TenSp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SoLuong)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaCt" />
+        <input type="submit" value="Xóa" class="btn btn-default" /> <br /> <br />
+        <a asp-controller="ChiTietHds" asp-action="Index" asp-route-id="@Model.MaHd">Quay về</a>
+    </form>
+</div>

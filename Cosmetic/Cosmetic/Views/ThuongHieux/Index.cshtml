@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Cosmetic.Models.ThuongHieu>
+
+@{
+    ViewData["Title"] = "| Thương hiệu";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Thương hiệu</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <p>
+            <a asp-action="Create">Thêm mới</a>
+        </p>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Danh sách
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.MaHieu)</th>
+                            <th>@Html.DisplayNameFor(model => model.TenHieu)</th>
+                            <th>@Html.DisplayNameFor(model => model.Hinh)</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.MaHieu)</td>
+                            <td>@Html.DisplayFor(modelItem => item.TenHieu)</td>
+                            <td><img style="height: 100px; width: 100px" src="~/Hinh/beauty/@item.Hinh" /></td>
+                            <td><a asp-action="Edit" asp-route-id="@item.MaHieu">Cập nhật</a></td>
+                            <td><a asp-action="Delete" asp-route-id="@item.MaHieu"onclick="return confirm('Bạn có muốn xóa ?')">Xóa</a></td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <!-- /.table-responsive -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

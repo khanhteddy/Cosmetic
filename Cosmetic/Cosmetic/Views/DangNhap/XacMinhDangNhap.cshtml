@@ -1,0 +1,17 @@
+@model Cosmetic.Models.KhachHang
+
+@{
+    ViewData["Title"] = "XacMinhDangNhap";
+    Layout = "~/Views/Shared/_Frontend.cshtml";
+}
+
+<h1>Xác minh đăng nhập</h1>
+
+        <form asp-action="XacMinhDangNhap" asp-controller="DangNhap" accept-charset="UTF-8" method="post">
+          <div>
+            <label>Nhập mã xác minh được gửi đến số của bạn</label>
+            <input name="token" id="token">
+            <button name="button" type="submit">Xác minh</button>
+          </div>
+          <p style="font-style:italic; color:deeppink">@ViewBag.Result</p>
+        </form>

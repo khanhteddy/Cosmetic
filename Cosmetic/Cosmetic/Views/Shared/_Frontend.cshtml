@@ -1,0 +1,517 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    string loai = "Tất cả Sản phẩm";
+    if (ViewBag.Loai != null)
+    {
+        loai = (ViewBag.Loai as Loai).TenLoai;
+    }
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+    #myProgress {
+    width: 100%;
+    background-color: #ddd;
+    }
+
+    #myBar {
+    width: 10%;
+    height: 2px;
+    background-color: #800080;
+    text-align: center;
+    line-height: 30px;
+    color: white;
+    }
+    </style>
+
+    <meta name="google-site-verification" content="GEr_2ywK-gY5kl8hyTh4U-kkG5PgyZY-sYOH81ROzOc" />
+    <meta charset="utf-8">
+    <meta property="fb:app_id" content="443695919745450" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Obaju</title>
+    <meta name="description" content="Nhà phân phối mỹ phẩm chính hãng - Luôn cập nhật xu hướng mới nhất. Sự lựa chọn hoàn hảo dành cho bạn.">
+    <meta name="viewport" content="initial-scale=0.8, zoom=10%, width=device-width, target-densitydpi=high-dpi">
+    <meta name="robots" content="all,follow">
+    @RenderSection("metasocials", required: false)
+    <!-- Bootstrap CSS-->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome CSS-->
+    <link href="~/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Google fonts - Roboto -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100">
+    <!-- owl carousel-->
+    <link href="~/css/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/css/owl.theme.default.css" rel="stylesheet" />
+    <!-- theme stylesheet-->
+    <link href="~/css/style.pink.css" rel="stylesheet" id="theme-stylesheet" />
+    <link href="~/css/cart.css" rel="stylesheet" />
+    <!-- Custom stylesheet - for your changes-->
+    <link href="~/css/custom.css" rel="stylesheet" />
+    <!-- Favicon-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="shortcut icon" type="image/png" href="~/Hinh/favicon2.ico" />
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d527bc54cd0540012f200e0&product=' inline-share-buttons' async='async'></script>
+    
+</head>
+
+<body>
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v4.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat"
+         attribution=setup_tool
+         page_id="104475554245862"
+         theme_color="#ff6666"
+         logged_in_greeting="Obaju xin chào bạn ❤️"
+         logged_out_greeting="Obaju xin chào bạn ❤️">
+    </div>
+    <!-- navbar-->
+    <header class="header mb-5">
+        <!--
+        *** TOPBAR ***
+        _________________________________________________________
+        -->
+        <!--
+        <script>
+            $(function () {
+                setInterval(function () {
+                    $.ajax({
+                        url: "/Ajax/ServerTime",
+                        method: "GET",
+                        success: function (response) {
+                            $("#dongHo").html(response);
+                        }
+                    });
+                }, 1000);
+
+            });
+        </script>
+        -->
+            <div id="myProgress">
+                <div id="myBar"></div>
+            </div>
+        <div id="top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 offer mb-3 mb-lg-0"><span id="dongHo"></span>&nbsp;<a href="#" class="btn btn-success btn-sm">Flash sale</a><a href="#" class="ml-1">giảm ngay 35% toàn bộ sản phẩm</a></div>
+                    <div class="col-lg-6 text-center text-lg-right">
+                        <ul class="menu list-inline mb-0">
+                            @if (Context.Session.Get<KhachHang>("TaiKhoan") != null)
+                            {
+                                KhachHang khach = Context.Session.Get<KhachHang>("TaiKhoan");
+                                <li class="list-inline-item"><a asp-controller="KhachHang">Xin chào @khach.HoTen !</a></li>
+                                <li class="list-inline-item"><a asp-action="DangXuat" asp-controller="DangNhap">Đăng xuất</a></li>
+                            }
+                            else
+                            {
+                                <li class="list-inline-item"><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                                <li class="list-inline-item"><a asp-action="DangKy" asp-controller="DangNhap">Đăng ký</a></li>
+                            }
+
+                            <li class="list-inline-item"><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" class="modal fade">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Đăng nhập khách hàng</h5>
+                            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                        </div>
+                        <div class="modal-body">
+                            <form asp-action="DangNhap" asp-controller="DangNhap" method="post">
+                                <div class="form-group">
+                                    <input name="makh" type="text" placeholder="Tài khoản" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <input name="matkhau" type="password" placeholder="Mật khẩu" class="form-control">
+                                </div>
+                                <div class="btn-group-sm">
+                                    <button class="btn btn-primary"><i class="fa fa-sign-in"></i> Đăng nhập</button>
+                                    <button class="btn btn-primary" asp-controller="RestoreAccount" asp-action="Index"><i class="fa fa-key"></i> Quên mật khẩu</button>
+                                </div>
+                            </form>
+                            <p class="text-center text-muted">Chưa có tài khoản?</p>
+                            <p class="text-center text-muted"><a href="/DangNhap/DangKy"><strong>Đăng ký ngay!&nbsp;</strong></a>Dễ dàng và nhanh chóng. Bạn sẽ nhận được giá ưu đãi từ cửa hàng và nhiều phẩn quà hơn thế nữa!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- *** TOP BAR END ***-->
+        </div>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a asp-action="Index" asp-controller="Home" class="navbar-brand home">
+                    <img src="~/images/logo.png" alt="Obaju logo" class="d-none d-md-inline-block"><img src="~/images/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - Quay về trang chủ</span>
+                </a>
+                <div class="navbar-buttons">
+                    <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+                    <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button><a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
+                </div>
+                <div id="navigation" class="collapse navbar-collapse">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link active">Trang chủ</a></li>
+                        <li class="nav-item dropdown menu-large">
+                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Sản phẩm<b class="caret"></b></a>
+                            <ul class="dropdown-menu megamenu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Trang điểm</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                @{
+                                                    MyPhamContext db = new MyPhamContext();
+                                                    var dsLoai = db.Loai
+                                                        .Where(p => p.MoTa == "0")
+                                                        .ToList();
+                                                    var dsLoai1 = db.Loai
+                                                        .Where(p => p.MoTa == "1")
+                                                        .ToList();
+                                                    var dsLoai2 = db.LoaiBlog
+                                                        .Where(p => p.MoTa == "2")
+                                                        .ToList();
+                                                    var dsLoai3 = db.LoaiBlog
+                                                        .Where(p => p.MoTa == "3")
+                                                        .ToList();
+                                                }
+                                                @foreach (var item in dsLoai)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                            @item.TenLoai
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Chăm sóc da</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                @foreach (var item in dsLoai1)
+                                                {
+                                                    <li class="nav-item">
+                                                        <a asp-action="Index" asp-route-loai="@item.TenLoai.ToUrlFriendly()" asp-controller="SanPham">
+                                                            @item.TenLoai
+                                                        </a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="banner"><a href="#"><img src="~/Hinh/beauty/moi.jpg" alt="" class="img img-fluid"></a></div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="banner"><a href="#"><img src="~/Hinh/beauty/spduong3.jpg" alt="" class="img img-fluid"></a></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown menu-large">
+                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Beauty Blog<b class="caret"></b></a>
+                            <ul class="dropdown-menu megamenu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Bài viết</h5>
+                                            <ul class="list-unstyled mb-3">                                               
+                                                <a asp-action="VnExpressIndex" asp-controller="TinTuc">
+                                                    Tin tức VnExpress
+                                                </a>   
+                                            </ul>
+                                            <ul class="list-unstyled mb-3"> 
+                                                <!-- <a asp-action="DanTriIndex" asp-controller="TinTuc">
+                                                    Tin tức Dân Trí
+                                                </a>       -->
+                                                <a target="_blank" rel="noopener noreferrer" href="https://dantri.com.vn/">Tin tức Dân Trí</a>                                          
+                                            </ul>
+                                             <ul class="list-unstyled mb-3"> 
+                                                <a asp-action="Index" asp-controller="RSSFeed">
+                                                    Công cụ đọc RSS feed
+                                                </a>                                                 
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Beauty blogger</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="banner"><a href="#"><img src="~/Hinh/beauty/blog8.png" alt="" class="img img-fluid"></a></div>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <div class="banner"><a href="#"><img src="~/Hinh/beauty/blog9.jpg" alt="" class="img img-fluid"></a></div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown menu-large">
+                            <a href="#" data-toggle="dropdown" data-hover="dropdown" data-delay="200" class="dropdown-toggle nav-link">Hệ thống<b class="caret"></b></a>
+                            <ul class="dropdown-menu megamenu">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Shop</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Trang chủ</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="SanPham" class="nav-link">Sản phẩm</a></li>
+                                                <li class="nav-item"><a asp-action="ChiTiet" asp-controller="SanPham" asp-route-id="1" class="nav-link">Chi tiết sản phẩm</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Khách hàng</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="DangNhap" class="nav-link">Đăng ký/ Đăng nhập</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="HoaDon" class="nav-link">Lịch sử đặt hàng</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="YeuThich" class="nav-link">Sản phẩm yêu thích</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="KhachHang" asp-action="Index" class="nav-link">Thông tin tài khoản / Đổi mật khẩu</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Đặt hàng</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                <li class="nav-item"><a asp-action="index" asp-controller="GioHang" class="nav-link">Giỏ hảng</a></li>
+                                                <li class="nav-item"><a asp-action="Index" asp-controller="ThanhToan" class="nav-link">Thanh toán bước 1</a></li>
+                                                <li class="nav-item"><a asp-action="ThanhToan1" asp-controller="ThanhToan" class="nav-link">Thanh toán bước 2</a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-6 col-lg-3">
+                                            <h5>Liên hệ</h5>
+                                            <ul class="list-unstyled mb-3">
+                                                <li class="nav-item"><a asp-action="Contact" asp-controller="Home" class="nav-link">Góp ý</a></li>
+                                                <li class="nav-item"><a asp-action="About" asp-controller="Home" class="nav-link">Hỏi đáp</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="navbar-buttons d-flex justify-content-end">
+                        <!-- /.nav-collapse-->
+                        <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
+
+
+                        @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                        {
+                            List<CartItem> GioHang = Context.Session.Get<List<CartItem>>("GioHang");
+                            int dem = 0;
+                            @foreach (var item in GioHang)
+                            {
+                                dem = dem + item.SoLuong;
+                            }
+                            <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>@dem sản phẩm</span></a></div>
+                        }
+                        else
+                        {
+                            <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><a asp-action="index" asp-controller="GioHang" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>0 sản phẩm</span></a></div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="search" class="collapse">
+            <div class="container">
+                <form action="/SanPham/timSp" method="post" class="ml-auto">
+                    <div class="input-group">
+                        <input type="text" placeholder="Tìm kiếm" class="form-control" name="keysearch" />
+                        <div class="input-group-append">
+                            <input type="submit" name="submit" value="Tìm kiếm" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </header>
+    <div id="all">
+        @RenderBody()
+    </div>
+    <!--
+    *** FOOTER ***
+    _________________________________________________________
+    -->
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="mb-3">Điều hướng</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="text.html">Trang chủ</a></li>
+                        <li><a href="text.html">Tài khoản</a></li>
+                        <li><a asp-action="Contact" asp-controller="Home">Liên hệ</a></li>
+                    </ul>
+                    <hr>
+                    <h4 class="mb-3">Tùy chọn người dùng</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" data-toggle="modal" data-target="#login-modal">Đăng nhập</a></li>
+                        <li><a href="register.html">Đăng ký</a></li>
+                    </ul>
+                </div>
+                <!-- /.col-lg-3-->
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="mb-3">Sản phẩm nổi bật</h4>
+                    <h5>Trang điểm</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="category.html">Trang điểm mặt</a></li>
+                        <li><a href="category.html">Trang điểm mắt</a></li>
+                        <li><a href="category.html">Trang điểm môi</a></li>
+                    </ul>
+                    <h5>Chăm sóc da</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="category.html">Dưỡng da mặt</a></li>
+                        <li><a href="category.html">Mặt nạ</a></li>
+                        <li><a href="category.html">Dưỡng body</a></li>
+                    </ul>
+                </div>
+                <!-- /.col-lg-3-->
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="mb-3">Địa chỉ</h4>
+                    <p><strong>Obaju.</strong><br>280 An Dương Vương<br>Phường 4, Quận 5<br>TP. Hồ Chí Minh <br>Việt Nam<br></p><a asp-action="Contact" asp-controller="Home">Trang liên hệ</a>
+                    <hr class="d-block d-md-none">
+                </div>
+                <!-- /.col-lg-3-->
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="mb-3">Đăng ký nhận tin khuyến mãi</h4>
+                    <p class="text-muted">Đăng ký để nhận thông báo và thông tin khuyến mãi nhanh nhất từ cửa hàng!</p>
+                    <!-- Mailchimp -->
+                    <!-- Begin Mailchimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+                    <style type="text/css">
+
+                        #mc_embed_signup {
+                            background: #fff;
+                            clear: left;
+                            font: 14px Helvetica,Arial,sans-serif;
+                        }
+                        /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                        We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                    </style>
+                    <!-- Begin Mailchimp Signup Form -->
+                    <link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+                    <div class="input-group">
+                        <form action="https://gmail.us3.list-manage.com/subscribe/post?u=459d4ef11b19087bda337e1b8&amp;id=3a1bf56cad" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                            <div class="mc-field-group">
+                                <input type="email" value="" name="EMAIL" class="form-control" placeholder="Nhập email tại đây ..." id="mce-EMAIL">
+                            </div>
+                            <div id="mce-responses" class="clear">
+                                <div class="response" id="mce-error-response" style="display:none"> </div>
+                                <div class="response" id="mce-success-response" style="display:none"> </div>
+                            </div>    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                            <div style="position: absolute; left: -5000px;" aria-hidden="true"> <input type="text" name="b_459d4ef11b19087bda337e1b8_3a1bf56cad" tabindex="-1" value=""> </div>
+                            <div class="clear"> <input type="submit" value="Đăng ký" name="subscribe" id="mc-embedded-subscribe" class="btn btn-outline-secondary"> </div>
+                        </form>
+                    </div>
+                    <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
+                    <script type='text/javascript'>(function ($) { window.fnames = new Array(); window.ftypes = new Array(); fnames[0] = 'EMAIL'; ftypes[0] = 'email'; fnames[1] = 'FNAME'; ftypes[1] = 'text'; fnames[2] = 'LNAME'; ftypes[2] = 'text'; fnames[3] = 'ADDRESS'; ftypes[3] = 'address'; fnames[4] = 'PHONE'; ftypes[4] = 'phone'; fnames[5] = 'BIRTHDAY'; ftypes[5] = 'birthday'; }(jQuery)); var $mcj = jQuery.noConflict(true);</script>
+                    <!--End mc_embed_signup-->
+                    <hr>
+                    <h4 class="mb-3">Thông tin liên hệ khác</h4>
+                    <p class="social"><a href="#" class="facebook external"><i class="fa fa-facebook"></i></a><a href="#" class="twitter external"><i class="fa fa-twitter"></i></a><a href="#" class="instagram external"><i class="fa fa-instagram"></i></a><a href="#" class="gplus external"><i class="fa fa-google-plus"></i></a><a href="#" class="email external"><i class="fa fa-envelope"></i></a></p>
+                </div>
+                <!-- /.col-lg-3-->
+            </div>
+            <!-- /.row-->
+        </div>
+        <!-- /.container-->
+    </div>
+    <!-- /#footer-->
+    <!-- *** FOOTER END ***-->
+    <!--
+    *** COPYRIGHT ***
+    ______________________
+    -->
+    <div id="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-2 mb-lg-0">
+                    <p class="text-center text-lg-left">©2018 Team 23, made with love for a better web </p>
+                </div>
+                <div class="col-lg-6">
+                    <p class="text-center text-lg-right">
+                        Template design by <a href="#">w3layouts.com</a>
+                        <!-- Not removing these links is part of the licence conditions of the template. Thanks for understanding :)-->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a id="toTop" style="display: inline;" href="#"><span id="toTopHover" style="opacity: 0;"></span>To Top</a>
+    <!-- *** COPYRIGHT END ***-->
+    <!-- JavaScript files-->
+    <!-- Chat Subiz đã được thêm vào -->
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/popper.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.cookie.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/owl.carousel2.thumbs.js"></script>
+    <script src="~/js/front.js"></script>
+    <script src="~/js/site.js"></script>
+    <!-- Subiz -->
+    <script>(function (s, u, b, i, z) {
+            u[i] = u[i] || function () {
+                u[i].t = +new Date();
+                (u[i].q = u[i].q || []).push(arguments);
+            };
+            z = s.createElement('script');
+            var zz = s.getElementsByTagName('script')[0];
+            z.async = 1; z.src = b; z.id = 'subiz-script';
+            zz.parentNode.insertBefore(z, zz);
+        })(document, window, 'https://widgetv4.subiz.com/static/js/app.js', 'subiz');
+        subiz('setAccount', 'acqknxhqfwngalhwoiwc');</script>
+    <!-- End Subiz -->
+    <!-- Start Script progress bar làm màu -->
+    <script>
+        var i = 0;
+        if (i == 0) 
+        {
+            i = 1;
+            var elem = document.getElementById("myBar");
+            var width = 5;
+            var id = setInterval(frame, 1);
+            function frame() 
+            {
+                if (width >= 100) {
+                    clearInterval(id);
+                    i = 0;
+                } 
+                else 
+                {
+                    width++;
+                    elem.style.width = width + "%";
+                }
+            }
+        }
+    </script>
+    <!-- End Script progress bar làm màu -->
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿@model Cosmetic.Models.BinhLuan
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<br />
+<br />
+
+<h3>Bạn có chắc chắn xóa bình luận của @Html.DisplayFor(model => model.HoTen) ? </h3>
+<div>
+    <h4>Thông tin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayBl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NgayBl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaKh)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaKh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HoTen)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoTen)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaSp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSp)
+        </dd>
+        <dt>
+            Tên sản phẩm
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaSpNavigation.TenSp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NoiDung)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NoiDung)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="MaBl" />
+        <input type="submit" value="Xóa" class="btn btn-default" /> <br /> <br />
+        <a asp-action="Index">Quay về</a>
+    </form>
+</div>

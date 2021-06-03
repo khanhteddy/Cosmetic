@@ -1,0 +1,73 @@
+﻿@model Cosmetic.Models.SanPham
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>SanPham</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenSp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenSp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TenAlias)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TenAlias)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MoTa)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DonGia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DonGia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hinh)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hinh)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hinh2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hinh2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GiaCu)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.GiaCu)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaLoaiNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaLoaiNavigation.MaLoai)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MaNccNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MaNccNavigation.MaNcc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.MaSp">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

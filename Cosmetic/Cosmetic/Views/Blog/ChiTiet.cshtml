@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "ChiTiet";
+    Layout = "~/Views/Shared/_Frontend.cshtml";
+}
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- breadcrumb-->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item"><a href="blog.html">Blog</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Skincare</li>
+                    </ol>
+                </nav>
+            </div>
+            <div id="blog-post" class="col-lg-9">
+                <div class="box">
+                    <h1>Chia sẻ cách sử dụng kem che khuyết điểm dạng thỏi hiệu quả cho da mặt</h1>
+                    <p class="author-date">Bởi <a href="#">John Slim</a> |  20 Tháng 12, 2018</p>
+                    <p class="lead">Kem che khuyết điểm dạng thỏi được các bạn nữ sử dụng rất nhiều để che đi những vết mụn, sẹo, thâm … trên mặt. Hãy cùng tham khảo cách sử dụng kem che khuyết điểm dạng thỏi cùng Obaju nhé!</p>
+                    <div id="post-content">
+
+                        <p><img src="~/images/skin1.jpg" alt="Example blog post alt" class="img-fluid"></p>
+                        <h2>1. Cách đánh kem che khuyết điểm bọng mắt và quầng thâm</h2>
+
+                        <blockquote class="blockquote">
+                            <p>Đối với bọng mắt và quầng thâm, bạn nên sử dụng kem che khuyết điểm dạng lỏng, với độ dưỡng ẩm cao, có chứa các thành phần vitamin A hay K càng tốt. Chọn màu kem che khuyết điểm có tone hồng để trung hòa vùng da hơi xanh ở dưới mắt. Sau cùng là dùng một lớp phấn phủ thoa lên vùng da vừa che khuyết điểm.</p>
+                            <p><img src="~/images/skin2.jpg" alt="Example blog post alt" class="img-fluid"></p>
+                        </blockquote>
+                        <h3>2. Hướng dẫn che khuyết điểm vùng nám và sẹo</h3>
+                        <p>Trước khi sử dụng kem che khuyết điểm cho vùng da nám hoặc sẹo, bạn nên phủ một lớp kem nền lên toàn bộ gương mặt để làm đều màu da. Dùng kem che khuyết điểm có dạng kem cho vùng nám và sẹo vì loại này có độ bao phủ cao, ít dầu hơn dạng lỏng, lâu trôi và bền màu hơn.</p>
+                        <blockquote class="blockquote">
+                            <p>Đối với bọng mắt và quầng thâm, bạn nên sử dụng kem che khuyết điểm dạng lỏng, với độ dưỡng ẩm cao, có chứa các thành phần vitamin A hay K càng tốt. Chọn màu kem che khuyết điểm có tone hồng để trung hòa vùng da hơi xanh ở dưới mắt. Sau cùng là dùng một lớp phấn phủ thoa lên vùng da vừa che khuyết điểm.</p>
+                            <p><img src="~/images/skin3.jpg" alt="Example blog post alt" class="img-fluid"></p>
+                        </blockquote>
+
+                        <p>Lưu ý là kem che khuyết điểm phải có màu nhạt hơn màu kem nền, ưu tiên màu vàng hoặc cam để dễ dàng che đi những vùng da sạm, tập trung nhiều sắc tố melanin. Với cách sử dụng kem che khuyết điểm dạng thỏi thì những vết nám và sẹo sẽ biến mất trên khuôn mặt của bạn.</p>
+                    </div>
+                    <!-- /#post-content-->
+                    <!-- /#comment-form-->
+                </div>
+                <!-- /.box-->
+            </div>
+            <!-- /#blog-post-->
+            <div class="col-lg-3">
+                <!--
+                *** BLOG MENU ***
+                _________________________________________________________
+                -->
+                <div class="card sidebar-menu mb-4">
+                    <div class="card-header">
+                        <h3 class="h4 panel-title">Beauty Blog</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav flex-column nav-pills">
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link">Review mỹ phẩm </a></li>
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link">Makeup</a></li>
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link active">Skincare</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.col-lg-3-->
+                <!-- *** BLOG MENU END ***-->
+                <div class="banner"><a href="#"><img src="~/Hinh/beauty/sale.jpg" alt="sales 2014" class="img-fluid"></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+

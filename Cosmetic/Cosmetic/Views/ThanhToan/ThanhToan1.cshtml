@@ -1,0 +1,328 @@
+﻿@model List<Cosmetic.Models.CartItem>
+@{
+    ViewData["Title"] = "ThanhToan1";
+    Layout = "~/Views/Shared/_Frontend.cshtml";
+}
+<script>
+    function PayPalPaymentEvent(eventid) {
+
+    var URL = 'https://www.paypal.com/cgi-bin/webscr?';
+        var cmd = '_xclick';
+
+        var business = "Cosmetic@business.com";
+    var currency_code = 'AUD';
+    var amount = 100;
+        var item_name = colorRadio;
+    var item_number = test2;
+        var returnurl = 'http://localhost:59401/';
+        var cancel_return = 'http://localhost:59401/';
+    var notify_url = 'http://WebFacingSite/API/PayPalReg';
+    var tax = (amount * 0.10);
+
+    var fullURL = URL + 'cmd=' + cmd + '&business=' + business + '&currency_code=' + currency_code + '&amount=' + amount + '&tax=' + tax + '&item_name=' + item_name + '&item_number=' + item_number + '&return=' + returnurl + '&cancel_return=' + cancel_return + '&notify_url=' + notify_url;
+
+    ///// this ajax bit I use to record the transaction has started
+    $.ajax({
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
+    url: '/API/PaymentStarted?eventid=' + eventid + '&UserID=' + UserID + '&paymentID' + paymentID,
+    error: function () {
+    SetMessage('error', 'Something has gone horribly, horribly wrong')
+    },
+    success: function (data) {
+
+    window.location.href = fullURL;
+
+    },
+    type: 'POST'
+    });
+
+
+    }
+</script>
+<script>
+    function myFunction() {
+        alert("Đặt hàng thành công! Bạn có thể theo dõi đơn hàng của mình.");
+
+    }
+</script>
+
+<script>
+    function myFunction1() {
+        alert("Xin lỗi, Không có đủ hàng cho sản phẩm này.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('input[type="radio"]').click(function () {
+            var inputValue = $(this).attr("value");
+            var targetBox = $("." + inputValue);
+            $(".box1").not(targetBox).hide();
+            $(targetBox).fadeIn(500);
+        });
+    });
+</script>
+
+<style>
+    .box1 {
+        display: none;
+    }
+
+    [type="radio"]:checked,
+    [type="radio"]:not(:checked) {
+        position: absolute;
+        left: -9999px;
+    }
+
+        [type="radio"]:checked + label,
+        [type="radio"]:not(:checked) + label {
+            position: relative;
+            padding-left: 28px;
+            cursor: pointer;
+            line-height: 20px;
+            display: inline-block;
+            color: #666;
+        }
+
+            [type="radio"]:checked + label:before,
+            [type="radio"]:not(:checked) + label:before {
+                content: '';
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 18px;
+                height: 18px;
+                border: 1px solid #6c757d;
+                border-radius: 100%;
+                background: #fff;
+            }
+
+            [type="radio"]:checked + label:after,
+            [type="radio"]:not(:checked) + label:after {
+                content: '';
+                width: 12px;
+                height: 12px;
+                background: #ff9999;
+                position: absolute;
+                top: 3px;
+                left: 3px;
+                border-radius: 100%;
+                -webkit-transition: all 0.2s ease;
+                transition: all 0.2s ease;
+            }
+
+            [type="radio"]:not(:checked) + label:after {
+                opacity: 0;
+                -webkit-transform: scale(0);
+                transform: scale(0);
+            }
+
+            [type="radio"]:checked + label:after {
+                opacity: 1;
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+</style>
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- breadcrumb-->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ </a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Thanh Toán bước 2</li>
+                    </ol>
+                </nav>
+            </div>
+            <div id="checkout" class="col-lg-9">
+                <div class="box">
+                    @{
+                        double tong = 0;
+                    }
+                    <h1>Hóa đơn của bạn</h1>
+                    <div class="nav flex-column flex-sm-row nav-pills"><a href="#" class="nav-link flex-sm-fill text-sm-center"> <i class="fa fa-map-marker">                  </i>Thông tin giao hàng</a><a asp-action="Index" asp-controller="ThanhToan" class="nav-link flex-sm-fill text-sm-center active"> <i class="fa fa-eye">                     </i>Hóa đơn của bạn</a> </div>
+                    @if (Context.Session.Get<KhachHang>("TaiKhoan") != null)
+                    {
+                        KhachHang kh = Context.Session.Get<KhachHang>("TaiKhoan");
+
+                        <form asp-action="DatHang" asp-controller="ThanhToan" method="post">
+                            @if (Context.Session.Get<List<NguoiNhan>>("ThongTin") != null)
+                            {
+                                List<NguoiNhan> info = Context.Session.Get<List<NguoiNhan>>("ThongTin");
+
+                                @foreach (var item in info)
+                                {
+                                    <input type="hidden" name="tennhan" value="@item.TenNhan" class="form-control" />
+                                    <input type="hidden" name="diachinhan" value="@item.DiaChiNhan" class="form-control" />
+                                    <input type="hidden" name="sdtnhan" value="@item.SDTNhan" class="form-control" />
+                                    <input type="hidden" name="ghichunhan" value="@item.GhiChu" class="form-control" />
+                                }
+                            }
+                            else
+                            {
+                                <input type="hidden" name="tennhan" value="@kh.HoTen" class="form-control" />
+                                <input type="hidden" name="diachinhan" value="@kh.DiaChi" class="form-control" />
+                                <input type="hidden" name="sdtnhan" value="@kh.DienThoai" class="form-control" />
+                            }
+                            <input type="hidden" name="makh" value="@kh.MaKh" class="form-control" />
+                            <input type="hidden" name="hotenkh" value="@kh.HoTen" class="form-control" />
+                            <input type="hidden" name="diachikh" value="@kh.DiaChi" class="form-control" />
+                            <input type="hidden" name="sdt" value="@kh.DienThoai" class="form-control" />
+                            <div class="content">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="2">Sản phẩm</th>
+                                                <th>Số lượng</th>
+                                                <th>Đơn giá</th>
+                                                <th colspan="1">Tổng cộng</th>
+                                            </tr>
+                                        </thead>
+                                        @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                                        {
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><a href="#"><img src="~/Hinh/beauty/@item.Hinh" alt="White Blouse Armani"></a></td>
+                                                        <td><a href="#">@item.TenHh</a></td>
+                                                        <td style="text-align:center">@item.SoLuong</td>
+                                                        <td>@item.GiaBan.ToString("#,##0") đ</td>
+                                                        <td>@item.ThanhTien.ToString("#,##0") đ</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                            <tfoot>
+                                                @foreach (var item in Model)
+                                                {
+                                                    tong = tong + item.ThanhTien;
+                                                }
+                                                <tr>
+                                                    <th colspan="4">Tổng cộng</th>
+                                                    <th>@tong.ToString("#,##0") đ</th>
+                                                </tr>
+                                            </tfoot>
+                                        }
+                                        else
+                                        {
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="6" style="text-align:center"><br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bạn chưa chọn sản phẩm nào<br /><br /><br /></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <th colspan="4">Tổng cộng</th>
+                                                    <th>0 đ</th>
+                                                </tr>
+                                            </tfoot>
+                                        }
+                                    </table>
+                                </div>
+                                <!-- /.table-responsive-->
+                            </div>
+                            <!-- /.content-->
+                            <div class="box-footer d-flex justify-content-between">
+                                <div>
+                                    <a asp-action="Index" asp-controller="ThanhToan" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>Quay lại thông tin giao hàng</a>
+
+                                </div>
+                                @if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                                {
+                                    <div>
+                                        <div>
+
+                                            <a><input type="radio" id="test1" name="colorRadio" value="cod"><label for="test1">Thanh toán khi nhận hàng &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>  </a>
+   
+                                        </div>
+                                        <a asp-action="DatHang" asp-controller="ThanhToan"><button style="position:relative;left:28px;top:7px;" type="submit" class="cod box1 btn btn-primary" onclick="myFunction()">Xác nhận đặt hàng</button></a>
+                                    </div>
+
+                                }
+                                else
+                                {
+
+                                }
+                            </div>
+                        </form>
+                        if (Context.Session.Get<List<CartItem>>("GioHang") != null)
+                        {
+                            <a asp-controller="Paypal" asp-action="PaypalPayment">
+                                <button style="background: none; padding:0;"><img src="~/images./checkpp.png" /></button>
+                            </a>
+                            <a data-layout="horizontal" asp-action="PaypalPayment" asp-controller="Paypal">
+                                <button  style="background: none; padding:0;"><img src="~/images./onepay.png" /></button>
+                            </a>
+                        }
+                        else
+
+                        {
+                            <a asp-controller="Paypal" asp-action="PaypalPayment">
+                                <button disabled style="background: none; padding:0;"><img src="~/images./checkpp.png" /></button>
+                            </a>
+                            <a data-layout="horizontal" asp-action="PaypalPayment" asp-controller="Paypal">
+                                <button disabled style="background: none; padding:0;"><img src="~/images./onepay.png" /></button>
+                            </a>
+                        }
+
+
+
+
+                    }
+                    else
+                    {
+                        <br />
+
+                        <div class="alert alert-danger" style="text-align:center"> <a asp-action="DangNhap" asp-controller="DangNhap">Bạn cần đăng nhập để tiếp tục mua hàng </a></div>
+
+                        <div class="box-footer d-flex justify-content-between">
+                            <a asp-action="action" asp-controller="Paypal" class="btn btn-outline-secondary"><i class="fa fa-chevron-left"></i>Quay lại giỏ hàng</a>
+                        </div>
+                    }
+
+                </div>
+
+
+
+                <!-- /.box-->
+            </div>
+            <!-- /.col-lg-9-->
+            <div class="col-lg-3">
+                <div id="order-summary" class="card">
+                    <div class="card-header" style="text-align:center">
+                        <h3 class="mt-4 mb-4">Thông tin hóa đơn</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Tổng tiền giỏ hàng</td>
+                                        <th>@tong.ToString("#,##0") đ</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Phí giao hàng</td>
+                                        <th>Miễn phí</th>
+                                    </tr>
+                                    <tr>
+                                        <td>Khuyến mãi</td>
+                                        <th>0</th>
+                                    </tr>
+                                    <tr class="total">
+                                        <td>Tổng cộng</td>
+                                        <th>@tong.ToString("#,##0") đ</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col-lg-3-->
+        </div>
+    </div>
+</div>

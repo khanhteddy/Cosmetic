@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Frontend.cshtml";
+}
+
+
+<div id="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- breadcrumb-->
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li aria-current="page" class="breadcrumb-item active">Skincare</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <!--
+            *** LEFT COLUMN ***
+            _________________________________________________________
+            -->
+            <div id="blog-listing" class="col-lg-9">
+                <div class="box">
+                    <h1>Cách SKINCARE hiệu quả</h1>
+
+                </div>
+                <!-- post-->
+                <div class="post">
+                    <h2><a href="post.html">Chia sẻ cách sử dụng kem che khuyết điểm dạng thỏi hiệu quả cho da mặt</a></h2>
+                    <p class="author-category">Bởi<a href="#"> John Slim </a> trong <a href="">Skincare</a></p>
+                    <hr>
+                    <p class="date-comments"><a href="post.html"><i class="fa fa-calendar-o"></i>20 Tháng 12, 2018</a><a href="post.html"><i class="fa fa-comment-o"></i> 0 bình luận</a></p>
+                    <div class="image"><a href="post.html"><img src="~/images/skin3.jpg" alt="Example blog post alt" class="img-fluid"></a></div>
+                    <p class="intro">Kem che khuyết điểm dạng thỏi được các bạn nữ sử dụng rất nhiều để che đi những vết mụn, sẹo, thâm … trên mặt. Hãy cùng tham khảo cách sử dụng kem che khuyết điểm dạng thỏi cùng Obaju nhé!</p>
+                    <p class="read-more"><a asp-action="ChiTiet" asp-controller="Blog" class="btn btn-primary">Xem tiếp</a></p>
+                </div>
+                <!-- post        -->
+                <div class="post">
+                    <h2><a href="post.html" Chăm sóc da mặt vào mùa đông với 8 bước đơn giản</a></h2>
+                    <p class="author-category">Bởi <a asp-action="ChiTiet" asp-controller="Blog"> John Slim </a> trong <a href="">Skincare</a></p>
+                    <hr>
+                    <p class="date-comments"><a asp-action="ChiTiet" asp-controller="Blog"><i class="fa fa-calendar-o"></i> 21 Thang 12 , 2018</a><a href="post.html"><i class="fa fa-comment-o"></i> 0 bình luận</a></p>
+                    <div class="image"><a asp-action="ChiTiet" asp-controller="Blog"><img src="~/images/skin6.jpg" alt="Example blog post alt" class="img-fluid"></a></div>
+                    <p class="intro">Vào mùa đông, thời tiết bắt đầu se lạnh làm da mặt bị khô và căng. Vì vậy để giúp các bạn có một làn da đẹp trong mùa đông này thì Mặt Hoa Da Phấn xin chia sẻ 8 bước chăm sóc da sau. </p>
+                    <p class="read-more"><a asp-action="ChiTiet" asp-controller="Blog" class="btn btn-primary">Xem tiếp</a></p>
+                </div>
+                <div class="pager d-flex justify-content-between">
+                    <div class="previous"><a href="#" class="btn btn-outline-primary">← Trang trước</a></div>
+                    <div class="next disabled"><a href="#" class="btn btn-outline-secondary disabled">Trang kế →        </a></div>
+                </div>
+            </div>
+            <!-- /.col-lg-9-->
+            <!-- *** LEFT COLUMN END ***-->
+
+            <div class="col-lg-3">
+                <!--
+                *** BLOG MENU ***
+                _________________________________________________________
+                -->
+                <div class="card sidebar-menu mb-4">
+                    <div class="card-header">
+                        <h3 class="h4 panel-title">Beauty Blog</h3>
+                    </div>
+                    <div class="card-body">
+                        <ul class="nav flex-column nav-pills">
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link">Review mỹ phẩm </a></li>
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link">Makeup</a></li>
+                            <li><a asp-action="Index" asp-controller="Blog" class="nav-link active">Skincare</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- /.col-lg-3-->
+                <!-- *** BLOG MENU END ***-->
+                <div class="banner"><a href="#"><img src="~/Hinh/beauty/sale.jpg" alt="sales 2014" class="img-fluid"></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
